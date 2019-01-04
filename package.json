@@ -1,0 +1,29 @@
+{
+  "name": "serverless-terraform-outputs",
+  "version": "0.0.2",
+  "description": "Serverless plugin for resolving variables from Terraform outputs",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Greg Zapp <ProTip>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rundeck/serverless-terraform-outputs"
+  },
+  "keywords": [
+    "serverless",
+    "serverless applications",
+    "terraform"
+  ],
+  "devDependencies": {
+    "@types/node": "^10.12.18",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
+  },
+  "files": [
+    "dist/**/*",
+    "*.md"
+  ]
+}
