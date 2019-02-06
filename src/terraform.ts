@@ -36,7 +36,7 @@ export class TFOutputs {
     pathError(path: string, part: string) {
         const errorMessage = [
             `terraform-serverless-outputs: Outputs property <${part}> not found in path <${path}>. `,
-            `Check Terraform outputs and verify property is pressent.`
+            `Check Terraform outputs and verify property is present.`
         ].join('')
         throw new this.serverless.classes.Error(errorMessage)
     }
