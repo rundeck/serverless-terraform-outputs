@@ -32,3 +32,17 @@ terraform {
 
 For outputs from multiple Terraform configurations it is recommended to set them up as data sources
 and re-export the required vars.
+
+## Configuration
+
+Optionally, you can configure the plugin:
+
+```
+custom:
+    terraformOutputs:
+        cwd: dir/with/terraform/files
+```
+
+| Parameter Name | Default Value | Description |
+| --- | --- | --- |
+| cwd | _(project base dir)_ | The directory where `terraform outputs` will be executed in, relative to the project base directory |

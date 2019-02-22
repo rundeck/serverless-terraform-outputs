@@ -1,8 +1,18 @@
 import {exec} from './async'
 
 
-export async function output(workspace: string): Promise<any> {
-    const res = await exec('terraform output -json', {env: {...process.env, TF_WORKSPACE: workspace}})
+export async function output(workspace: string, serverless: any): Promise<any> {
+    const pluginOptions = ((serverless.service || {}).custom || {}).terraformOutputs || {}
+
+    const options = {
+        cwd: pluginOptions.cwd,
+        env: {
+            ...process.env,
+            TF_WORKSPACE: workspace
+        }
+    }
+    
+    const res = await exec('terraform output -json', options)
     return JSON.parse(res.stdout)
 }
 
@@ -17,7 +27,7 @@ export class TFOutputs {
      */
     static async Load(workspace: string, serverless: any) {
         if(!this.resp)
-            this.resp = output(workspace)
+            this.resp = output(workspace, serverless)
         const outputs = await this.resp
         return new TFOutputs(outputs, serverless)
     }
