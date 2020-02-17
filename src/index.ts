@@ -21,9 +21,11 @@ class ServerlessTerraformOpts {
     }
 
     async _getValue(variable: string) {
-        const [workspace, path] = variable.split(':')
+        const items = variable.split(':')
+        const path = items.length > 1 ? items[1] : items[0]
+        const workspace = items.length > 1 ? items[0] : undefined
         
-        const outputs = await TFOutputs.Load(workspace, this.serverless)
+        const outputs = await TFOutputs.Load(this.serverless, workspace)
 
         const value = outputs.getValueAtPath(path)
 

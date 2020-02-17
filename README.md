@@ -1,7 +1,19 @@
 serverless-terraform-outputs
 ============================
 
-Provides variable substitution resolution from Terraform outputs with workspace support:
+Provides variable substitution resolution from Terraform outputs:
+
+```
+${terraform:sqs_queue_stuff.value.arn}
+```
+# Usage
+```yaml
+provider:
+    environment:
+        SQS_QUEUE: ${terraform:sqs_queue_stuff.value.url}
+```
+
+## Workspace support
 ```
 ${terraform:app-stage:sqs_queue_stuff.value.arn}
 ```

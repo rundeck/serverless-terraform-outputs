@@ -1,7 +1,7 @@
 import {exec} from './async'
 
 
-export async function output(workspace: string, serverless: any): Promise<any> {
+export async function output(serverless: any, workspace?: string): Promise<any> {
     const pluginOptions = ((serverless.service || {}).custom || {}).terraformOutputs || {}
 
     const options = {
@@ -25,9 +25,9 @@ export class TFOutputs {
      * Use Terraform command to fetch outputs and construct TFOutputs instance.
      * @param workspace Name of Terraform workspace to use
      */
-    static async Load(workspace: string, serverless: any) {
+    static async Load(serverless: any, workspace?: string) {
         if(!this.resp)
-            this.resp = output(workspace, serverless)
+            this.resp = output(serverless, workspace)
         const outputs = await this.resp
         return new TFOutputs(outputs, serverless)
     }
