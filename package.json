@@ -1,6 +1,6 @@
 {
   "name": "serverless-terraform-outputs",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Serverless plugin for resolving variables from Terraform outputs",
   "main": "dist/index.js",
   "scripts": {
@@ -18,12 +18,15 @@
     "terraform"
   ],
   "devDependencies": {
-    "@types/node": "^10.12.18",
+    "@types/node": "^10.17.28",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
   },
   "files": [
     "dist/**/*",
     "*.md"
-  ]
+  ],
+  "dependencies": {
+    "aws-sdk": "^2.735.0"
+  }
 }

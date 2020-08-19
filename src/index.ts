@@ -2,7 +2,10 @@
 const TF_PREFIX = 'terraform:'
 const PLUGIN_NAME = 'serverless-terraform-outputs'
 
-import {TFOutputs} from './terraform'
+import {TFOutputs, TFWorkspace, S3_PREFIX} from './terraform'
+import { worker } from 'cluster'
+import { stringify } from 'querystring'
+
 
 class ServerlessTerraformOpts {
     serverless: any
@@ -21,9 +24,11 @@ class ServerlessTerraformOpts {
     }
 
     async _getValue(variable: string) {
-        const [workspace, path] = variable.split(':')
-        
-        const outputs = await TFOutputs.Load(workspace, this.serverless)
+        const i = variable.lastIndexOf(':')
+        const workspace = variable.substr(0, i)
+        const path = variable.substr(i+ 1, variable.length)
+       
+        const outputs = await TFWorkspace.Load(workspace, this.serverless)
 
         const value = outputs.getValueAtPath(path)
 
