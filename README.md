@@ -76,7 +76,7 @@ custom:
 
 ## Change log
 
-## 0.0.5 (dev)
+## 0.1.0 (dev)
 
 - add dependency on "aws-sdk" and aws client to retreive shared terraform state stored on S3.
 - introduce TFWorkspace to load several workspace
