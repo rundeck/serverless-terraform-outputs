@@ -1,6 +1,6 @@
 
 const TF_PREFIX = 'terraform:'
-const PLUGIN_NAME = 'serverless-terraform-outputs'
+const PLUGIN_NAME = 'serverless-terraform-outputs-v2'
 
 import {TFOutputs} from './terraform'
 
