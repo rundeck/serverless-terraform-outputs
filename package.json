@@ -18,9 +18,9 @@
     "terraform"
   ],
   "devDependencies": {
-    "@types/node": "^10.12.18",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.2"
+    "@types/node": "^18.11.16",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "files": [
     "dist/**/*",
