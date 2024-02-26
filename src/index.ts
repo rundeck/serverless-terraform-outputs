@@ -6,28 +6,26 @@ import {TFOutputs} from './terraform'
 
 class ServerlessTerraformOpts {
     serverless: any
+    configurationVariablesSources: any
     outputs!: TFOutputs
 
     constructor(serverless: any) {
         this.serverless = serverless
-        const delegate = serverless.variables.getValueFromSource.bind(serverless.variables)
-
-        serverless.variables.getValueFromSource = (variableString: string) => {
-            if (variableString.startsWith(TF_PREFIX))
-                return this._getValue(variableString.split(TF_PREFIX)[1])
-            else
-                return delegate(variableString)
-        }
-    }
-
-    async _getValue(variable: string) {
-        const [workspace, path] = variable.split(':')
         
-        const outputs = await TFOutputs.Load(workspace, this.serverless)
+        this.configurationVariablesSources = {
+            terraform: {
+              async resolve({ address }: any) {                
+                const [workspace, path] = address.split(':');
+                const outputs = await TFOutputs.Load(workspace, serverless);
+                const value = outputs.getValueAtPath(path);
 
-        const value = outputs.getValueAtPath(path)
-
-        return value
+                return {
+                  //
+                  value: value,
+                };
+              },
+          },
+        };
     }
 }
 
